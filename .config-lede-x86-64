@@ -52,8 +52,8 @@ CONFIG_PACKAGE_luci-app-filetransfer=y
 CONFIG_PACKAGE_luci-app-filebrowser=y
 
 # Docker
-# CONFIG_PACKAGE_luci-app-docker=y
-# CONFIG_PACKAGE_luci-app-dockerman=y
+CONFIG_PACKAGE_luci-app-docker=y
+CONFIG_PACKAGE_luci-app-dockerman=y
 
 # SAMBA4
 # CONFIG_PACKAGE_autosamba is not set
