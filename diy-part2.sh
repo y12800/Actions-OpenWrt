@@ -13,6 +13,8 @@
 # 修改openwrt登陆地址,把下面的192.168.2.2修改成你想要的就可以了
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 
+sed -i 's/CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"/CONFIG_FAT_DEFAULT_IOCHARSET="utf8"/g' target/linux/generic/config-5.15
+
 # 修改主机名字，把OpenWrt-123修改你喜欢的就行（不能纯数字或者使用中文）
 # sed -i '/uci commit system/i\uci set system.@system[0].hostname='OpenWrt-123'' package/lean/default-settings/files/zzz-default-settings
 
@@ -26,7 +28,7 @@ sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_genera
 # sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
 
 #修正连接数（by ベ七秒鱼ベ）
-sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
+# sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
 #sirpdboy
 # git clone https://github.com/sirpdboy/sirpdboy-package.git package/sirpdboy-package
@@ -34,7 +36,7 @@ git clone https://github.com/sirpdboy/luci-theme-opentopd.git package/luci-theme
 # git clone https://github.com/sirpdboy/luci-app-advanced.git package/luci-app-advanced
 # git clone https://github.com/sirpdboy/netspeedtest.git package/netspeedtest
 
-git clone https://github.com/sirpdboy/luci-app-netdata.git package/luci-app-netdata
+# git clone https://github.com/sirpdboy/luci-app-netdata.git package/luci-app-netdata
 # rm -rf feeds/luci/applications/luci-app-netdata && git clone https://github.com/sirpdboy/luci-app-netdata.git package/luci-app-netdata
 
 # git clone https://github.com/sirpdboy/luci-app-poweroffdevice.git package/luci-app-poweroffdevice
@@ -51,8 +53,8 @@ git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git package/l
 
 # git clone https://github.com/kenzok8/openwrt-packages.git package/openwrt-packages
 
-
-git clone https://github.com/gdy666/luci-app-lucky.git package/luci-app-lucky
+# git clone https://github.com/gdy666/luci-app-lucky.git package/luci-app-lucky
+git clone https://github.com/sirpdboy/luci-app-lucky.git package/luci-app-lucky
 # git clone https://github.com/y12800/luci-app-lucky.git package/lucky
 git clone https://github.com/sirpdboy/luci-app-autotimeset.git package/luci-app-autotimeset
 
