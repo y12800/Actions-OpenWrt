@@ -22,6 +22,7 @@ git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
 git clone --depth 1 https://github.com/y12800/luci-app-filebrowser package/filebrowser
 git clone --depth 1 https://github.com/lisaac/luci-app-diskman package/luci-app-diskman
+git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 
 # git clone --depth 1 https://github.com/kenzok8/small-package deng-tmp1 && mv deng-tmp1/wrtbwmon package/deng/wrtbwmon && mv deng-tmp1/dnsforwarder package/deng/dnsforwarder
