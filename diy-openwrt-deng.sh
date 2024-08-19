@@ -20,6 +20,7 @@ git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/lu
 git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app-openclash
 git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
+git clone --depth 1 https://github.com/y12800/luci-app-filebrowser package/filebrowser
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 
 # git clone --depth 1 https://github.com/kenzok8/small-package deng-tmp1 && mv deng-tmp1/wrtbwmon package/deng/wrtbwmon && mv deng-tmp1/dnsforwarder package/deng/dnsforwarder
@@ -56,5 +57,3 @@ sed -i 's/luci-theme-bootstrap/luci-theme-opentomcat/g' ./feeds/luci/collections
 # curl -L https://github.com/UnblockNeteaseMusic/server/raw/enhanced/ca.crt -o $NAME/core/ca.crt
 # curl -L https://github.com/UnblockNeteaseMusic/server/raw/enhanced/server.crt -o $NAME/core/server.crt
 # curl -L https://github.com/UnblockNeteaseMusic/server/raw/enhanced/server.key -o $NAME/core/server.key
-
-git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-theme-opentomcat
