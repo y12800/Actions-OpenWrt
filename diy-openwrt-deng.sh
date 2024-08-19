@@ -41,7 +41,7 @@ git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/l
 sed -i 's/192.168.1.1/192.168.10.11/g' package/base-files/files/bin/config_generate
 
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
-sed -i 's/luci-theme-bootstrap/luci-theme-opentomcat/g' ./feeds/luci/collections/luci/Makefile
+# sed -i 's/luci-theme-bootstrap/luci-theme-opentomcat/g' ./feeds/luci/collections/luci/Makefile
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-qbittorrent/Makefile
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-vsftpd/Makefile
