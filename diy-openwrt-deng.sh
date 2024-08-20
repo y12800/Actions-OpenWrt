@@ -2,6 +2,7 @@
 
 rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
+rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
 # git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config.git package/deng/luci-app-argon-config
 # git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/deng/luci-theme-argon
@@ -22,7 +23,8 @@ git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
 git clone --depth 1 https://github.com/y12800/luci-app-filebrowser package/filebrowser
-git clone --depth 1 https://github.com/lisaac/luci-app-diskman package/luci-app-diskman
+git clone --depth 1 https://github.com/lisaac/luci-app-diskman.git package/luci-app-diskman
+git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 
