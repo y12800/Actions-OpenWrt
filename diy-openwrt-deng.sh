@@ -1,8 +1,8 @@
 #!/bin/bash
 
-rm -rf feeds/luci/applications/luci-app-dockerman
+# rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
-rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
+# rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
 # git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config.git package/deng/luci-app-argon-config
 git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/deng/luci-theme-argon
@@ -18,7 +18,7 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-ddns-go package/deng/lu
 # git clone --depth 1 https://github.com/Jason6111/luci-app-netdata package/deng/luci-app-netdata
 # git clone --depth 1 https://github.com/esirplayground/luci-app-poweroff package/deng/luci-app-poweroff
 git clone --depth 1 https://github.com/tty228/luci-app-wechatpush.git package/deng/luci-app-wechatpush
-git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
+# git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
 # git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app-openclash
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
@@ -47,7 +47,7 @@ git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
-# sed -i 's/luci-theme-bootstrap/luci-theme-opentomcat/g' ./feeds/luci/collections/luci/Makefile
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
