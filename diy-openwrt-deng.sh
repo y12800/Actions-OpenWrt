@@ -23,7 +23,7 @@ git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/lu
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
 git clone --depth 1 https://github.com/y12800/luci-app-filebrowser package/filebrowser
-# git clone --depth 1 https://github.com/lisaac/luci-app-diskman.git package/luci-app-diskman
+git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/luci-app-diskman
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
@@ -35,7 +35,7 @@ git clone --depth 1 https://github.com/y12800/luci-app-filebrowser package/fileb
 # git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp4 && mv deng-tmp4/package/lean/autocore package/deng/autocore && mv deng-tmp4/package/lean/vsftpd-alt package/deng/vsftpd-alt
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp5 && mv deng-tmp5/applications/luci-app-qbittorrent package/deng/luci-app-qbittorrent && mv deng-tmp5/applications/luci-app-vsftpd package/deng/luci-app-vsftpd && mv deng-tmp5/applications/luci-app-cpufreq package/deng/luci-app-cpufreq && mv deng-tmp5/applications/luci-app-diskman package/deng/luci-app-diskman
 # git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp6 && mv deng-tmp6/libs/rblibtorrent package/deng/rblibtorrent && mv deng-tmp6/libs/qttools package/deng/qttools && mv deng-tmp6/libs/qtbase package/deng/qtbase && mv deng-tmp6/net/qBittorrent package/deng/qBittorrent && mv deng-tmp6/net/qBittorrent-static package/deng/qBittorrent-static
-git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7 && mv deng-tmp7/applications/luci-app-diskman package/deng/luci-app-diskman && mv deng-tmp7/applications/luci-app-zerotier package/deng/luci-app-zerotier && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat
+git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7  && mv deng-tmp7/applications/luci-app-zerotier package/deng/luci-app-zerotier && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat
 git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/zerotier package/deng/zerotier && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat
 # git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp9 && mv deng-tmp9/package/lean/shortcut-fe package/deng/shortcut-fe
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp10 && mv deng-tmp10/applications/luci-app-turboacc package/deng/luci-app-turboacc
@@ -49,8 +49,8 @@ sed -i 's/192.168.1.1/192.168.10.11/g' package/base-files/files/bin/config_gener
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
 # sed -i 's/luci-theme-bootstrap/luci-theme-opentomcat/g' ./feeds/luci/collections/luci/Makefile
 
-sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
+# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
+# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-socat/Makefile
