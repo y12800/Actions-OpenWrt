@@ -29,6 +29,7 @@ git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
 git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web.git package/deng/luci-app-speedtest-web
 git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
+git clone --depth 1 https://github.com/animegasan/luci-app-speedtest package/deng/luci-app-speedtest
 
 
 # git clone --depth 1 https://github.com/kenzok8/small-package deng-tmp1 && mv deng-tmp1/wrtbwmon package/deng/wrtbwmon && mv deng-tmp1/dnsforwarder package/deng/dnsforwarder
