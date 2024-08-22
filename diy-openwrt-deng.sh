@@ -27,7 +27,7 @@ git clone --depth 1 https://github.com/xiaozhuai/luci-app-filebrowser
 # git clone --depth 1 https://github.com/sbwml/openwrt-filebrowser package/luci-app-filebrowser
 # git clone --depth 1 https://github.com/sbwml/openwrt-filebrowser package/filebrowser
 
-git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/deng/luci-app-diskman
+# git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/deng/luci-app-diskman
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
@@ -49,7 +49,7 @@ git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7  && mv deng-tm
 git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/zerotier package/deng/zerotier && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat
 # git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp9 && mv deng-tmp9/package/lean/shortcut-fe package/deng/shortcut-fe
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp10 && mv deng-tmp10/applications/luci-app-turboacc package/deng/luci-app-turboacc
-
+git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp5 && mv deng-tmp5/applications/luci-app-diskman package/deng/luci-app-diskman
 
 
 
@@ -60,7 +60,7 @@ sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_genera
 sed -i 's/luci-theme-openwrt-2020/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
+# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-socat/Makefile
