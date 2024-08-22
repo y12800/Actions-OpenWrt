@@ -23,12 +23,12 @@ git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/lu
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
 git clone --depth 1 https://github.com/y12800/luci-app-filebrowser package/filebrowser
-git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/luci-app-diskman
+git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/deng/luci-app-diskman
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
-git clone https://github.com/ZeaKyX/luci-app-speedtest-web.git package/luci-app-speedtest-web
-git clone https://github.com/ZeaKyX/speedtest-web.git package/speedtest-web
+git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web.git package/deng/luci-app-speedtest-web
+git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
 
 
 # git clone --depth 1 https://github.com/kenzok8/small-package deng-tmp1 && mv deng-tmp1/wrtbwmon package/deng/wrtbwmon && mv deng-tmp1/dnsforwarder package/deng/dnsforwarder
@@ -51,8 +51,8 @@ sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_genera
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 
-# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
-# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-socat/Makefile
