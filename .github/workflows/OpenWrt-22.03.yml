@@ -2,7 +2,7 @@
 # https://github.com/quanjindeng/Actions_OpenWrt
 #
 
-name: Build OpenWrt-22.03
+name: OpenWrt-22.03
 
 on:
   repository_dispatch:
