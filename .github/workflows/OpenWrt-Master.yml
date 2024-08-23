@@ -2,7 +2,7 @@
 # https://github.com/quanjindeng/Actions_OpenWrt
 #
 
-name: Build OpenWrt-Master
+name: OpenWrt-Master
 
 on:
   repository_dispatch:
