@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf feeds/luci/applications/luci-app-dockerman
+# rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
@@ -9,7 +9,7 @@ git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/de
 # git clone --depth 1 https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git package/deng/luci-app-unblockneteasemusic
 # git clone --depth 1 https://github.com/sirpdboy/netspeedtest.git package/deng/netspeedtest
 git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall package/deng/luci-app-passwall
-git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall2 package/deng/luci-app-passwall2
+# git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall2 package/deng/luci-app-passwall2
 git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/deng/passwall-packages
 # git clone --depth 1 https://github.com/sbwml/luci-app-alist package/deng/luci-app-alist
 git clone --depth 1 https://github.com/kenzok78/luci-app-adguardhome package/deng/luci-app-adguardhome
@@ -18,7 +18,7 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-ddns-go package/deng/lu
 # git clone --depth 1 https://github.com/Jason6111/luci-app-netdata package/deng/luci-app-netdata
 # git clone --depth 1 https://github.com/esirplayground/luci-app-poweroff package/deng/luci-app-poweroff
 git clone --depth 1 https://github.com/tty228/luci-app-wechatpush.git package/deng/luci-app-wechatpush
-git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
+# git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
 # git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app-openclash
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
@@ -31,8 +31,8 @@ git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
-# git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web.git package/deng/luci-app-speedtest-web
-# git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
+git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web.git package/deng/luci-app-speedtest-web
+git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
 # git clone --depth 1 https://github.com/librespeed/speedtest-go.git package/deng/speedtest-go
 # git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
 
@@ -57,7 +57,7 @@ git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
-sed -i 's/luci-theme-openwrt-2020/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
