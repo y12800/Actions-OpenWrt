@@ -1,9 +1,6 @@
 #!/bin/bash
 
 rm -rf feeds/luci/applications/luci-app-dockerman
-rm -rf feeds/utils/docker-compose
-rm -rf feeds/utils/docker
-rm -rf feeds/utils/dockerd
 rm -rf feeds/packages/utils/docker-compose
 rm -rf feeds/packages/utils/docker
 rm -rf feeds/packages/utils/dockerd
