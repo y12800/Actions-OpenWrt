@@ -1,12 +1,6 @@
 #!/bin/bash
 
 rm -rf feeds/luci/applications/luci-app-dockerman
-rm -rf feeds/packages/utils/docker-compose
-rm -rf feeds/packages/utils/docker
-rm -rf feeds/packages/utils/dockerd
-
-
-
 rm -rf feeds/luci/applications/luci-app-filebrowser
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
@@ -24,7 +18,7 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-ddns-go package/deng/lu
 # git clone --depth 1 https://github.com/Jason6111/luci-app-netdata package/deng/luci-app-netdata
 # git clone --depth 1 https://github.com/esirplayground/luci-app-poweroff package/deng/luci-app-poweroff
 git clone --depth 1 https://github.com/tty228/luci-app-wechatpush.git package/deng/luci-app-wechatpush
-# git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
+git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
 # git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app-openclash
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
@@ -56,8 +50,7 @@ git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng
 # git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp9 && mv deng-tmp9/package/lean/shortcut-fe package/deng/shortcut-fe
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp10 && mv deng-tmp10/applications/luci-app-turboacc package/deng/luci-app-turboacc
 
-git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp6 && mv deng-tmp6/utils/docker-compose package/deng/docker-compose && mv deng-tmp6/utils/docker package/deng/docker && mv deng-tmp6/utils/dockerd package/deng/dockerd
-git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp5 && mv deng-tmp5/applications/luci-app-dockerman package/deng/luci-app-dockerman
+
 
 # Modify default IP（FROM 192.168.1.1 CHANGE TO 10.10.10.1）
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
@@ -65,12 +58,6 @@ sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_genera
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
-
-sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-dockerman/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/docker-compose/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/docker/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/dockerd/Makefile
-
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-vlmcsd/Makefile
