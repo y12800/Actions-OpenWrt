@@ -46,7 +46,7 @@ git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/spe
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp5 && mv deng-tmp5/applications/luci-app-qbittorrent package/deng/luci-app-qbittorrent && mv deng-tmp5/applications/luci-app-vsftpd package/deng/luci-app-vsftpd && mv deng-tmp5/applications/luci-app-cpufreq package/deng/luci-app-cpufreq && mv deng-tmp5/applications/luci-app-diskman package/deng/luci-app-diskman
 # git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp6 && mv deng-tmp6/libs/rblibtorrent package/deng/rblibtorrent && mv deng-tmp6/libs/qttools package/deng/qttools && mv deng-tmp6/libs/qtbase package/deng/qtbase && mv deng-tmp6/net/qBittorrent package/deng/qBittorrent && mv deng-tmp6/net/qBittorrent-static package/deng/qBittorrent-static
 git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7  && mv deng-tmp7/applications/luci-app-zerotier package/deng/luci-app-zerotier && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat
-git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/zerotier package/deng/zerotier && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat
+git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/zerotier package/deng/zerotier && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat && mv deng-tmp8/net/ddns-scripts_aliyun package/deng/ddns-scripts_aliyun
 # git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp9 && mv deng-tmp9/package/lean/shortcut-fe package/deng/shortcut-fe
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp10 && mv deng-tmp10/applications/luci-app-turboacc package/deng/luci-app-turboacc
 
@@ -65,6 +65,8 @@ sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-socat/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/socat/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/ddns-scripts_aliyun/Makefile
+
 
 # NAME=$"package/deng/luci-app-unblockneteasemusic/root/usr/share/unblockneteasemusic" && mkdir -p $NAME/core
 # curl 'https://api.github.com/repos/UnblockNeteaseMusic/server/commits?sha=enhanced&path=precompiled' -o commits.json
