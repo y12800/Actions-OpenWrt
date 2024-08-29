@@ -26,7 +26,7 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/
 git clone --depth 1 https://github.com/xiaozhuai/luci-app-filebrowser package/luci-app-filebrowser
 # git clone --depth 1 https://github.com/sbwml/openwrt-filebrowser package/luci-app-filebrowser
 # git clone --depth 1 https://github.com/sbwml/openwrt-filebrowser package/filebrowser
-git clone --depth 1 https://github.com/danchexiaoyang/luci-app-kodexplorer package/luci-app-kodexplorer
+# git clone --depth 1 https://github.com/danchexiaoyang/luci-app-kodexplorer package/luci-app-kodexplorer
 
 git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/deng/luci-app-diskman
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
