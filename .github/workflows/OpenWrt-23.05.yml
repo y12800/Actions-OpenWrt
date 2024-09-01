@@ -115,7 +115,8 @@ jobs:
     - name: Apply customizations
       run: |
         cd openwrt
-        source ../app.sh
+        wget https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app.sh
+        source ./app.sh
 
     - name: 下载软件包
       id: package
