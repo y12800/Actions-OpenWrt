@@ -115,7 +115,7 @@ jobs:
     - name: Apply customizations
       run: |
         cd project
-        source ../diy-part1.sh
+        source ../app.sh
 
     - name: 下载软件包
       id: package
