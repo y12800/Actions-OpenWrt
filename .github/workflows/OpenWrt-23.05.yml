@@ -112,6 +112,11 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
+    - name: Apply customizations
+      run: |
+        cd project
+        source ../diy-part1.sh
+
     - name: 下载软件包
       id: package
       run: |
