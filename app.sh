@@ -10,3 +10,17 @@
     mkdir -p package/parted
     wget https://raw.githubusercontent.com/lisaac/luci-app-diskman/master/Parted.Makefile -O package/parted/Makefile
 })
+# cat >> configs/rockchip/01-nanopi <<EOL
+# CONFIG_PACKAGE_luci-app-diskman=y
+# CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
+# CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
+# CONFIG_PACKAGE_smartmontools=y
+# EOL
+
+
+
+#    - name: Apply customizations
+#      run: |
+#        cd project
+#        source ../scripts/add_packages.sh
+#        source ../scripts/custome_config.sh
