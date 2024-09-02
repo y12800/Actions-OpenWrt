@@ -4,6 +4,7 @@
 
 rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
+rm -rf packages/utils/parted
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
 # git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config.git package/deng/luci-app-argon-config
