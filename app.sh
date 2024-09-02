@@ -16,7 +16,7 @@ make package/luci-app-diskman/compile V=99
 #compile
 #make menuconfig
 #choose LuCI ---> 3. Applications  ---> <*> luci-app-diskman..... Disk Manager interface for LuCI ----> save
-make V=99
+#make V=99
 
 
 
