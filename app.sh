@@ -11,7 +11,7 @@ mkdir -p package/parted && \
 wget https://raw.githubusercontent.com/lisaac/luci-app-diskman/master/Parted.Makefile -O package/parted/Makefile
 
 #compile package only
-# make package/luci-app-diskman/compile V=99
+make package/luci-app-diskman/compile V=99
 
 #compile
 #make menuconfig
