@@ -8,12 +8,12 @@ git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/de
 git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/deng/luci-app-argon-config
 git clone --depth 1 https://github.com/derisamedia/luci-theme-alpha package/deng/luci-theme-alpha
 git clone --depth 1 https://github.com/derisamedia/luci-app-alpha-config package/deng/luci-app-alpha-config
-git clone --depth 1 https://github.com/sirpdboy/luci-theme-kucat package/deng/luci-theme-kucat
+# git clone --depth 1 https://github.com/sirpdboy/luci-theme-kucat package/deng/luci-theme-kucat
 # git clone --depth 1 https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git package/deng/luci-app-unblockneteasemusic
 # git clone --depth 1 https://github.com/sirpdboy/netspeedtest.git package/deng/netspeedtest
 git clone --depth 1 https://github.com/sirpdboy/luci-app-parentcontrol package/deng/luci-app-parentcontrol
 git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd.git package/deng/luci-app-cupsd
-git clone --depth 1 https://github.com/sirpdboy/myautocore package/deng/myautocore
+# git clone --depth 1 https://github.com/sirpdboy/myautocore package/deng/myautocore
 
 
 
