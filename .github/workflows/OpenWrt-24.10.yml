@@ -112,11 +112,11 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
-    - name: Apply customizations
-      run: |
-        cd openwrt
-        wget https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app.sh
-        source ./app.sh
+    #- name: Apply customizations
+    #  run: |
+    #    cd openwrt
+    #    wget https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app.sh
+    #    source ./app.sh
 
     - name: 下载软件包
       id: package
