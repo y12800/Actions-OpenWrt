@@ -35,6 +35,10 @@ git clone --depth 1 https://github.com/danchexiaoyang/luci-app-kodexplorer packa
 # git clone --depth 1 https://github.com/sbwml/openwrt-filebrowser package/luci-app-filebrowser
 # git clone --depth 1 https://github.com/sbwml/openwrt-filebrowser package/filebrowser
 
+git clone --depth 1 https://github.com/vernesong/OpenClash.git package/OpenClash
+git clone --depth 1 https://github.com/pymumu/openwrt-smartdns package/smartdns
+git clone --depth 1 https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns
+
 # git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/deng/luci-app-diskman
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
@@ -63,7 +67,7 @@ git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng
 
 # Modify default IP（FROM 192.168.1.1 CHANGE TO 10.10.10.1）
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
-
+sed -i 's/CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"/CONFIG_FAT_DEFAULT_IOCHARSET="utf8"/g' target/linux/generic/config-6.6
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
 sed -i 's/luci-theme-openwrt-2020/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 
