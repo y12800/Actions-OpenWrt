@@ -78,7 +78,7 @@ git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp6 && mv den
 
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp10 && mv deng-tmp10/applications/luci-app-turboacc package/deng/luci-app-turboacc
 
-
+svn export https://github.com/coolsnowwolf/lede/tree/master/package/lean/ddns-scripts_aliyun package/deng/ddns-scripts_aliyun
 
 
 # Modify default IP（FROM 192.168.1.1 CHANGE TO 10.10.10.1）
