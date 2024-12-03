@@ -4,10 +4,10 @@
 
 rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
-rm -rf feeds/luci/applications/luci-app-acme
+# rm -rf feeds/luci/applications/luci-app-acme
 rm -rf packages/net/zerotier
-rm -rf packages/net/socat
-rm -rf packages/net/acme
+# rm -rf packages/net/socat
+# rm -rf packages/net/acme
 
 
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
@@ -66,25 +66,25 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd.git package/deng/
 
 # git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp4 && mv deng-tmp4/package/lean/autocore package/deng/autocore && mv deng-tmp4/package/lean/vsftpd-alt package/deng/vsftpd-alt
 
-git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp5 && mv deng-tmp5/applications/luci-app-diskman package/deng/luci-app-diskman && mv deng-tmp5/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp5/applications/luci-app-socat package/deng/luci-app-socat && mv deng-tmp5/applications/luci-app-zerotier package/deng/luci-app-zerotier && mv deng-tmp5/applications/luci-app-acme package/deng/luci-app-acme
+git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp5 && mv deng-tmp5/applications/luci-app-diskman package/deng/luci-app-diskman
 
-git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp6 && mv deng-tmp6/net/zerotier package/deng/zerotier && mv deng-tmp6/net/vlmcsd package/deng/vlmcsd && mv deng-tmp6/net/socat package/deng/socat && mv deng-tmp6/net/acme package/deng/acme
+# git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp6 && mv deng-tmp6/net/zerotier package/deng/zerotier && mv deng-tmp6/net/vlmcsd package/deng/vlmcsd && mv deng-tmp6/net/socat package/deng/socat && mv deng-tmp6/net/acme package/deng/acme
 
-# git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7 && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat && mv deng-tmp7/applications/luci-app-zerotier package/deng/luci-app-zerotier
+git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7 && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat && mv deng-tmp7/applications/luci-app-zerotier package/deng/luci-app-zerotier
 
-# git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat && mv deng-tmp8/net/zerotier package/deng/zerotier
+git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat && mv deng-tmp8/net/zerotier package/deng/zerotier
 
 # git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp9 && mv deng-tmp9/package/lean/shortcut-fe package/deng/shortcut-fe
 
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp10 && mv deng-tmp10/applications/luci-app-turboacc package/deng/luci-app-turboacc
 
-svn export https://github.com/coolsnowwolf/lede/tree/master/package/lean/ddns-scripts_aliyun package/deng/ddns-scripts_aliyun
-
+# svn export https://github.com/coolsnowwolf/lede/tree/master/package/lean/ddns-scripts_aliyun package/deng/ddns-scripts_aliyun
+git clone --depth 1  https://github.com/coolsnowwolf/lede/tree/master/package/lean/ddns-scripts_aliyun package/deng/ddns-scripts_aliyun
 
 # Modify default IP（FROM 192.168.1.1 CHANGE TO 10.10.10.1）
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 sed -i 's/CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"/CONFIG_FAT_DEFAULT_IOCHARSET="utf8"/g' target/linux/generic/config-6.6
-sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
+# sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/base-files/files/etc/sysctl.conf
 
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
 # sed -i 's/luci-theme-openwrt-2020/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
@@ -94,11 +94,11 @@ sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-socat/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-acme/Makefile
+
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/socat/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme/Makefile
+
 # NAME=$"package/deng/luci-app-unblockneteasemusic/root/usr/share/unblockneteasemusic" && mkdir -p $NAME/core
 # curl 'https://api.github.com/repos/UnblockNeteaseMusic/server/commits?sha=enhanced&path=precompiled' -o commits.json
 # echo "$(grep sha commits.json | sed -n "1,1p" | cut -c 13-52)">"$NAME/core_local_ver"
