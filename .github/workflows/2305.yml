@@ -2,7 +2,7 @@
 # https://github.com/quanjindeng/Actions_OpenWrt
 #
 
-name: 2305
+name: LEDE-APP
 
 on:
   repository_dispatch:
@@ -11,8 +11,8 @@ on:
     - cron: 0 16 4,9,14,19,24,28,31 * *
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-23.05
+  REPO_URL: https://github.com/y12800/openwrt
+  REPO_BRANCH: openwrt-24.01
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: OpenWrt-24.10.config
   DIY_P1_SH: diy-part1.sh
@@ -169,7 +169,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-23.05_x64_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt-LEDE-APP-24.01_x64_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 生成release标签
