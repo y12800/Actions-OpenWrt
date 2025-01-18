@@ -14,9 +14,9 @@ git clone --depth 1 https://github.com/derisamedia/luci-theme-alpha package/deng
 git clone --depth 1 https://github.com/derisamedia/luci-app-alpha-config package/deng/luci-app-alpha-config
 # git clone --depth 1 https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git package/deng/luci-app-unblockneteasemusic
 # git clone --depth 1 https://github.com/sirpdboy/netspeedtest.git package/deng/netspeedtest
-git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall package/deng/luci-app-passwall
-git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall2 package/deng/luci-app-passwall2
-git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/deng/passwall-packages
+# git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall package/deng/luci-app-passwall
+# git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall2 package/deng/luci-app-passwall2
+# git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/deng/passwall-packages
 # git clone --depth 1 https://github.com/sbwml/luci-app-alist package/deng/luci-app-alist
 git clone --depth 1 https://github.com/kenzok78/luci-app-adguardhome package/deng/luci-app-adguardhome
 # git clone --depth 1 https://github.com/zzsj0928/luci-app-pushbot package/deng/luci-app-pushbot
