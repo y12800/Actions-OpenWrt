@@ -4,10 +4,12 @@
 
 rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
-# rm -rf feeds/luci/applications/luci-app-acme
+rm -rf feeds/luci/applications/luci-app-acme
+rm -rf packages/net/acme
+rm -rf packages/net/acme-acmesh
 # rm -rf packages/net/zerotier
 # rm -rf packages/net/socat
-# rm -rf packages/net/acme
+
 
 
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
@@ -68,13 +70,19 @@ git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.
 # git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier
 # sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
 
-git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7 && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat
+
+
+
+git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7 && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat && mv deng-tmp7/applications/luci-app-acme package/deng/luci-app-acme
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-socat/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-acme/Makefile
 
-git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat
+git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp8 && mv deng-tmp8/net/vlmcsd package/deng/vlmcsd && mv deng-tmp8/net/socat package/deng/socat && mv deng-tmp8/net/acme package/deng/acme && mv deng-tmp8/net/acme-acmesh package/deng/acme-acmesh
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/vlmcsd/Makefile
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/socat/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme-acmesh/Makefile
 
 git clone --depth 1 https://github.com/coolsnowwolf/lede deng-tmp9 && mv deng-tmp9/package/lean/ddns-scripts_aliyun package/deng/ddns-scripts_aliyun
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/ddns-scripts_aliyun/Makefile
@@ -92,9 +100,9 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 
+rm -rf packages/net/zerotier/files/etc/config/zerotier
+mkdir -p packages/net/zerotier/files/etc/config && wget -O packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 packages/net/zerotier/files/etc/config/zerotier
 
-
-net/zerotier/files/etc/config/zerotier
 
 
 # NAME=$"package/deng/luci-app-unblockneteasemusic/root/usr/share/unblockneteasemusic" && mkdir -p $NAME/core
