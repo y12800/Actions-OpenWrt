@@ -1,0 +1,16 @@
+
+config zerotier 'global'
+	option enabled '0'
+
+config network 'earth'
+	option id '8056c2e21c000001'
+	option allow_managed '1'
+	option allow_global '0'
+	option allow_default '0'
+	option allow_dns '0'
+
+config zerotier 'sample_config'
+	option enabled '1'
+	list join '565799d8f69e8c85'
+	option nat '1'
+
