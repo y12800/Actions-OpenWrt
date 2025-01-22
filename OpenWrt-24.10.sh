@@ -3,12 +3,18 @@
 
 
 rm -rf feeds/luci/applications/luci-app-dockerman
+
 rm -rf feeds/luci/applications/luci-app-filebrowser
+
 rm -rf feeds/luci/applications/luci-app-acme
-# rm -rf packages/net/acme
-# rm -rf packages/net/acme-acmesh
-rm -rf packages/net/zerotier
-# rm -rf packages/net/socat
+rm -rf feeds/packages/net/acme
+rm -rf feeds/packages/net/acme-acmesh
+rm -rf feeds/packages/net/acme-common
+
+rm -rf feeds/packages/net/zerotier
+
+rm -rf feeds/packages/net/speedtest-go
+# rm -rf feeds/packages/net/socat
 
 
 
@@ -54,10 +60,10 @@ git clone --depth 1 https://github.com/y12800/zerotier package/deng/zerotier
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
-# git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web package/deng/luci-app-speedtest-web
-# git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
+git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web package/deng/luci-app-speedtest-web
+git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
 # git clone --depth 1 https://github.com/librespeed/speedtest-go.git package/deng/speedtest-go
-# git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
+git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
 
 
 
@@ -72,7 +78,13 @@ git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.
 # git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier
 # sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
 
+git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp4 && mv deng-tmp4/applications/luci-app-acme package/deng/luci-app-acme
+sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-acme/Makefile
 
+git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp5 && mv deng-tmp5/net/acme package/deng/acme && mv deng-tmp5/net/acme-acmesh package/deng/acme-acmesh && mv deng-tmp5/net/acme-common package/deng/acme-common    
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme-acmesh/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme-common/Makefile
 
 
 git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7 && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat
@@ -101,8 +113,8 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 
-rm -rf packages/net/zerotier/files/etc/config/zerotier
-mkdir -p packages/net/zerotier/files/etc/config && wget -O packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 packages/net/zerotier/files/etc/config/zerotier
+# rm -rf packages/net/zerotier/files/etc/config/zerotier
+# mkdir -p packages/net/zerotier/files/etc/config && wget -O packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 packages/net/zerotier/files/etc/config/zerotier
 
 
 
