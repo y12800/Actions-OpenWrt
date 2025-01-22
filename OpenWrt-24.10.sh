@@ -14,7 +14,7 @@ rm -rf packages/net/zerotier
 
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
-git clone --depth 1 https://github.com/immortalwrt-collections/luci-theme-neobird package/deng/luci-theme-neobird
+# git clone --depth 1 https://github.com/immortalwrt-collections/luci-theme-neobird package/deng/luci-theme-neobird
 
 git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/deng/luci-theme-argon
 git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/deng/luci-app-argon-config
@@ -101,8 +101,8 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 
-# rm -rf packages/net/zerotier/files/etc/config/zerotier
-# mkdir -p packages/net/zerotier/files/etc/config && wget -O packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 packages/net/zerotier/files/etc/config/zerotier
+rm -rf packages/net/zerotier/files/etc/config/zerotier
+mkdir -p packages/net/zerotier/files/etc/config && wget -O packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 packages/net/zerotier/files/etc/config/zerotier
 
 
 
