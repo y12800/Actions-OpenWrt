@@ -7,7 +7,7 @@ rm -rf feeds/luci/applications/luci-app-filebrowser
 rm -rf feeds/luci/applications/luci-app-acme
 rm -rf packages/net/acme
 rm -rf packages/net/acme-acmesh
-# rm -rf packages/net/zerotier
+rm -rf packages/net/zerotier
 # rm -rf packages/net/socat
 
 
@@ -48,6 +48,7 @@ git clone --depth 1 https://github.com/pymumu/openwrt-smartdns package/smartdns
 git clone --depth 1 https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns
 git clone --depth 1 https://github.com/sirpdboy/luci-app-parentcontrol package/deng/luci-app-parentcontrol
 git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd.git package/deng/luci-app-cupsd
+git clone --depth 1 https://github.com/y12800/zerotier package/deng/zerotier
 
 
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
@@ -101,8 +102,8 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 
-rm -rf packages/net/zerotier/files/etc/config/zerotier
-mkdir -p packages/net/zerotier/files/etc/config && wget -O packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 packages/net/zerotier/files/etc/config/zerotier
+# rm -rf packages/net/zerotier/files/etc/config/zerotier
+# mkdir -p packages/net/zerotier/files/etc/config && wget -O packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 packages/net/zerotier/files/etc/config/zerotier
 
 
 
