@@ -13,7 +13,7 @@ rm -rf feeds/packages/net/acme-common
 
 rm -rf feeds/packages/net/zerotier
 
-rm -rf feeds/packages/net/speedtest-go
+# rm -rf feeds/packages/net/speedtest-go
 # rm -rf feeds/packages/net/socat
 
 
@@ -60,10 +60,10 @@ git clone --depth 1 https://github.com/y12800/zerotier package/deng/zerotier
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
-git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web package/deng/luci-app-speedtest-web
-git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
+# git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web package/deng/luci-app-speedtest-web
+# git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
 # git clone --depth 1 https://github.com/librespeed/speedtest-go.git package/deng/speedtest-go
-git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
+# git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
 
 
 
