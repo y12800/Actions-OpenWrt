@@ -11,6 +11,6 @@ config network 'earth'
 
 config zerotier 'sample_config'
 	option enabled '1'
-	list join '565799d8f69e8c85'
+	list join 'b15644912e99c8bd'
 	option nat '1'
 
