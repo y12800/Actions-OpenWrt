@@ -6,10 +6,10 @@ rm -rf feeds/luci/applications/luci-app-dockerman
 
 rm -rf feeds/luci/applications/luci-app-filebrowser
 
-rm -rf feeds/luci/applications/luci-app-acme
-rm -rf feeds/packages/net/acme
-rm -rf feeds/packages/net/acme-acmesh
-rm -rf feeds/packages/net/acme-common
+#rm -rf feeds/luci/applications/luci-app-acme
+#rm -rf feeds/packages/net/acme
+#rm -rf feeds/packages/net/acme-acmesh
+#rm -rf feeds/packages/net/acme-common
 
 rm -rf feeds/packages/net/zerotier
 
@@ -78,13 +78,13 @@ git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.
 # git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier
 # sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
 
-git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp4 && mv deng-tmp4/applications/luci-app-acme package/deng/luci-app-acme
-sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-acme/Makefile
+# git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp4 && mv deng-tmp4/applications/luci-app-acme package/deng/luci-app-acme
+# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-acme/Makefile
 
-git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp5 && mv deng-tmp5/net/acme package/deng/acme && mv deng-tmp5/net/acme-acmesh package/deng/acme-acmesh && mv deng-tmp5/net/acme-common package/deng/acme-common    
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme-acmesh/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme-common/Makefile
+# git clone --depth 1 https://github.com/immortalwrt/packages deng-tmp5 && mv deng-tmp5/net/acme package/deng/acme && mv deng-tmp5/net/acme-acmesh package/deng/acme-acmesh && mv deng-tmp5/net/acme-common package/deng/acme-common    
+# sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme/Makefile
+# sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme-acmesh/Makefile
+# sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/acme-common/Makefile
 
 
 git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp7 && mv deng-tmp7/applications/luci-app-vlmcsd package/deng/luci-app-vlmcsd && mv deng-tmp7/applications/luci-app-socat package/deng/luci-app-socat
