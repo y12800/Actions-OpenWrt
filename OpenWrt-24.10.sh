@@ -113,8 +113,8 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 
-rm -rf feeds/packages/zerotier/files/etc/config/zerotier
-mkdir -p feeds/packages/zerotier/files/etc/config && wget -O feeds/packages/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 feeds/packages/zerotier/files/etc/config/zerotier
+rm -rf feeds/packages/net/zerotier/files/etc/config/zerotier
+mkdir -p feeds/packages/net/zerotier/files/etc/config && wget -O feeds/packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 feeds/packages/net/zerotier/files/etc/config/zerotier
 
 
 
