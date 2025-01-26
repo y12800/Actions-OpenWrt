@@ -116,7 +116,8 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 rm -rf feeds/packages/net/zerotier/files/etc/config/zerotier
 mkdir -p feeds/packages/net/zerotier/files/etc/config && wget -O feeds/packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 feeds/packages/net/zerotier/files/etc/config/zerotier
 
-
+rm -rf package/deng/zerotier/files/etc/config/zerotier
+mkdir -p package/deng/zerotier/files/etc/config && wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 package/deng/zerotier/files/etc/config/zerotier
 
 # NAME=$"package/deng/luci-app-unblockneteasemusic/root/usr/share/unblockneteasemusic" && mkdir -p $NAME/core
 # curl 'https://api.github.com/repos/UnblockNeteaseMusic/server/commits?sha=enhanced&path=precompiled' -o commits.json
