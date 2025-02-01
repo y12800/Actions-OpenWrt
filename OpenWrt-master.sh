@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -rf feeds/luci/applications/luci-app-dockerman
+# rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
@@ -18,7 +18,7 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-ddns-go package/deng/lu
 # git clone --depth 1 https://github.com/Jason6111/luci-app-netdata package/deng/luci-app-netdata
 # git clone --depth 1 https://github.com/esirplayground/luci-app-poweroff package/deng/luci-app-poweroff
 git clone --depth 1 https://github.com/tty228/luci-app-wechatpush.git package/deng/luci-app-wechatpush
-git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
+# git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
 # git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app-openclash
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
