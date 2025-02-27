@@ -55,7 +55,7 @@ git clone --depth 1 https://github.com/pymumu/luci-app-smartdns.git package/luci
 # git clone --depth 1 https://github.com/sirpdboy/luci-app-parentcontrol package/deng/luci-app-parentcontrol
 git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd.git package/deng/luci-app-cupsd
 # git clone --depth 1 https://github.com/y12800/zerotier package/deng/zerotier
-
+git clone --depth 1 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
