@@ -22,6 +22,9 @@ rm -rf feeds/packages/net/zerotier
 
 # git clone --depth 1 https://github.com/immortalwrt-collections/luci-theme-neobird package/deng/luci-theme-neobird
 
+git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
+git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall-packages
+
 git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/deng/luci-theme-argon
 git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/deng/luci-app-argon-config
 
