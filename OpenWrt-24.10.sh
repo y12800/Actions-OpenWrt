@@ -64,7 +64,7 @@ echo '    nft add table ip nat' >> package/base-files/files/usr/bin/docker-nft
 echo '    nft add chain ip nat PREROUTING { type nat hook prerouting priority -100 \; }' >> package/base-files/files/usr/bin/docker-nft
 echo '    nft add chain ip nat POSTROUTING { type nat hook postrouting priority 100 \; }' >> package/base-files/files/usr/bin/docker-nft
 echo '    nft add rule ip nat POSTROUTING oifname != "docker0" masquerade' >> package/base-files/files/usr/bin/docker-nft
-echo '    nft add table ip filter' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add table ip filter' >> package/base-files/files/usr/bin/docker-nft
 echo '    nft add chain ip filter INPUT { type filter hook input priority 0 \; }' >> package/base-files/files/usr/bin/docker-nft
 echo '    nft add chain ip filter FORWARD { type filter hook forward priority 0 \; }' >> package/base-files/files/usr/bin/docker-nft
 echo '    nft add chain ip filter OUTPUT { type filter hook output priority 0 \; }' >> package/base-files/files/usr/bin/docker-nft
