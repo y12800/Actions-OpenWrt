@@ -43,7 +43,8 @@ git clone --depth 1 https://github.com/xiaozhuai/luci-app-filebrowser package/lu
 # git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
 
 git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/deng/luci-app-diskman
-
+git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
+git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall-packages
 
 # git clone --depth 1 https://github.com/kenzok8/small-package deng-tmp1 && mv deng-tmp1/wrtbwmon package/deng/wrtbwmon && mv deng-tmp1/dnsforwarder package/deng/dnsforwarder
 # git clone --depth 1 https://github.com/messense/aliyundrive-webdav deng-tmp2 && mv deng-tmp2/openwrt package/deng/aliyundrive-webdav
