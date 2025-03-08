@@ -177,9 +177,8 @@ wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubuserco
 # 配置 ZeroTier 的防火墙规则，放置到正确的路径
 mkdir -p package/base-files/files/etc/uci-defaults
 
-# 使用 cat 写入防火墙规则
-cat > package/base-files/files/etc/uci-defaults/99-zerotier-firewall <<'EOL'
-#!/bin/sh
+# 创建防火墙规则脚本
+echo '#!/bin/sh
 
 # 允许所有 ZeroTier 流量
 nft add table ip zerotier
@@ -193,10 +192,10 @@ nft add rule ip zerotier output udp sport 9993 accept
 
 # 允许转发所有流量
 nft add rule ip zerotier forward accept
-EOL
+' > package/base-files/files/etc/uci-defaults/99-zerotier-firewall
 
 # 设置脚本为可执行
-chmod +x package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+chmod +x package/base-files/files/etc/uci-defaults/99-zerotier-firewall
 
 
 
