@@ -39,7 +39,62 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-ddns-go package/deng/lu
 # git clone --depth 1 https://github.com/Jason6111/luci-app-netdata package/deng/luci-app-netdata
 # git clone --depth 1 https://github.com/esirplayground/luci-app-poweroff package/deng/luci-app-poweroff
 git clone --depth 1 https://github.com/tty228/luci-app-wechatpush.git package/deng/luci-app-wechatpush
+
+
+# git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
+
+# 下载 luci-app-dockerman 软件包
 git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
+
+# 配置 Docker 禁用 iptables
+mkdir -p package/base-files/files/etc/docker
+cat > package/base-files/files/etc/docker/daemon.json <<EOF
+{
+    "iptables": false
+}
+EOF
+
+# 创建 docker-nft 管理脚本
+mkdir -p package/base-files/files/usr/bin
+cat > package/base-files/files/usr/bin/docker-nft <<EOF
+#!/bin/sh
+
+ACTION=\$1
+
+if [ -z "\$ACTION" ]; then
+    echo "用法: docker-nft {start|stop}"
+    exit 1
+fi
+
+if [ "\$ACTION" = "start" ]; then
+    echo "启动 Docker 并加载 nftables 规则..."
+    /etc/init.d/dockerd start
+    nft add table ip nat
+    nft add chain ip nat PREROUTING { type nat hook prerouting priority -100 \; }
+    nft add chain ip nat POSTROUTING { type nat hook postrouting priority 100 \; }
+    nft add rule ip nat POSTROUTING oifname != "docker0" masquerade
+    nft add table ip filter
+    nft add chain ip filter INPUT { type filter hook input priority 0 \; }
+    nft add chain ip filter FORWARD { type filter hook forward priority 0 \; }
+    nft add chain ip filter OUTPUT { type filter hook output priority 0 \; }
+    nft add rule ip filter FORWARD iifname "docker0" accept
+    nft add rule ip filter FORWARD oifname "docker0" accept
+    echo "Docker 启动完成，规则已应用。"
+fi
+
+if [ "\$ACTION" = "stop" ]; then
+    echo "停止 Docker 并清除 nftables 规则..."
+    /etc/init.d/dockerd stop
+    nft delete table ip nat
+    nft delete table ip filter
+    echo "Docker 停止完成，规则已清除。"
+fi
+EOF
+
+chmod +x package/base-files/files/usr/bin/docker-nft
+
+
+
 # git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app-openclash
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
@@ -127,7 +182,6 @@ wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubuserco
 # 配置 ZeroTier 的防火墙规则，放置到正确的路径
 mkdir -p package/base-files/files/etc/uci-defaults
 cat << EOF > package/base-files/files/etc/uci-defaults/99-zerotier-firewall
-#!/bin/sh
 
 # 允许所有 ZeroTier 流量
 nft add table ip zerotier
