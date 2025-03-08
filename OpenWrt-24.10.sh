@@ -113,15 +113,15 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
 
-rm -rf feeds/packages/net/zerotier/files/etc/config/zerotier
-mkdir -p feeds/packages/net/zerotier/files/etc/config && wget -O feeds/packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 feeds/packages/net/zerotier/files/etc/config/zerotier
+# rm -rf feeds/packages/net/zerotier/files/etc/config/zerotier
+# mkdir -p feeds/packages/net/zerotier/files/etc/config && wget -O feeds/packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 feeds/packages/net/zerotier/files/etc/config/zerotier
 
 rm -rf package/deng/zerotier/files/etc/config/zerotier
 mkdir -p package/deng/zerotier/files/etc/config && wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 package/deng/zerotier/files/etc/config/zerotier
 
-# 设置简化的 ZeroTier 防火墙规则
-mkdir -p files/etc/uci-defaults
-cat << EOF > files/etc/uci-defaults/99-zerotier-firewall
+# 配置 ZeroTier 的防火墙规则，放置到正确的路径
+mkdir -p package/base-files/files/etc/uci-defaults
+cat << EOF > package/base-files/files/etc/uci-defaults/99-zerotier-firewall
 #!/bin/sh
 
 # 允许所有 ZeroTier 流量
@@ -138,7 +138,8 @@ nft add rule ip zerotier output udp sport 9993 accept
 nft add rule ip zerotier forward accept
 EOF
 
-chmod +x files/etc/uci-defaults/99-zerotier-firewall
+chmod +x package/base-files/files/etc/uci-defaults/99-zerotier-firewall
+
 
 
 
