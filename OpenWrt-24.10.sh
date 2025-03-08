@@ -3,22 +3,19 @@
 
 
 rm -rf feeds/luci/applications/luci-app-dockerman
-
 rm -rf feeds/luci/applications/luci-app-filebrowser
-
 #rm -rf feeds/luci/applications/luci-app-acme
 #rm -rf feeds/packages/net/acme
 #rm -rf feeds/packages/net/acme-acmesh
 #rm -rf feeds/packages/net/acme-common
-
 rm -rf feeds/packages/net/zerotier
-
 # rm -rf feeds/packages/net/speedtest-go
 # rm -rf feeds/packages/net/socat
-
-
-
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
+
+
+
+
 
 # git clone --depth 1 https://github.com/immortalwrt-collections/luci-theme-neobird package/deng/luci-theme-neobird
 
@@ -121,6 +118,31 @@ mkdir -p feeds/packages/net/zerotier/files/etc/config && wget -O feeds/packages/
 
 rm -rf package/deng/zerotier/files/etc/config/zerotier
 mkdir -p package/deng/zerotier/files/etc/config && wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 package/deng/zerotier/files/etc/config/zerotier
+
+# 设置简化的 ZeroTier 防火墙规则
+mkdir -p files/etc/uci-defaults
+cat << EOF > files/etc/uci-defaults/99-zerotier-firewall
+#!/bin/sh
+
+# 允许所有 ZeroTier 流量
+nft add table ip zerotier
+nft add chain ip zerotier input { type filter hook input priority 0; }
+nft add chain ip zerotier forward { type filter hook forward priority 0; }
+nft add chain ip zerotier output { type filter hook output priority 0; }
+
+# 开放 ZeroTier 默认 UDP 端口
+nft add rule ip zerotier input udp dport 9993 accept
+nft add rule ip zerotier output udp sport 9993 accept
+
+# 允许转发所有流量
+nft add rule ip zerotier forward accept
+EOF
+
+chmod +x files/etc/uci-defaults/99-zerotier-firewall
+
+
+
+
 
 # NAME=$"package/deng/luci-app-unblockneteasemusic/root/usr/share/unblockneteasemusic" && mkdir -p $NAME/core
 # curl 'https://api.github.com/repos/UnblockNeteaseMusic/server/commits?sha=enhanced&path=precompiled' -o commits.json
