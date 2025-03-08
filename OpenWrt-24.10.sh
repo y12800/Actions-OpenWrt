@@ -48,44 +48,44 @@ git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/lu
 
 # 配置 Docker 禁用 iptables
 mkdir -p package/base-files/files/etc/docker
-echo '{
-    "iptables": false
-}' > package/base-files/files/etc/docker/daemon.json
+echo '{' > package/base-files/files/etc/docker/daemon.json
+echo '    "iptables": false' >> package/base-files/files/etc/docker/daemon.json
+echo '}' >> package-base-files/files/etc/docker/daemon.json
 
 # 创建 docker-nft 管理脚本
 mkdir -p package/base-files/files/usr/bin
-cat > package/base-files/files/usr/bin/docker-nft <<'EOL'
-#!/bin/sh
-echo "用法: docker-nft {start|stop}"
+echo '#!/bin/sh' > package/base-files/files/usr/bin/docker-nft
+echo 'echo "用法: docker-nft {start|stop}"' >> package/base-files/files/usr/bin/docker-nft
 
-[ "$1" = "start" ] && {
-    echo "启动 Docker 并加载 nftables 规则..."
-    /etc/init.d/dockerd start
-    nft add table ip nat
-    nft add chain ip nat PREROUTING { type nat hook prerouting priority -100 \; }
-    nft add chain ip nat POSTROUTING { type nat hook postrouting priority 100 \; }
-    nft add rule ip nat POSTROUTING oifname != "docker0" masquerade
-    nft add table ip filter
-    nft add chain ip filter INPUT { type filter hook input priority 0 \; }
-    nft add chain ip filter FORWARD { type filter hook forward priority 0 \; }
-    nft add chain ip filter OUTPUT { type filter hook output priority 0 \; }
-    nft add rule ip filter FORWARD iifname "docker0" accept
-    nft add rule ip filter FORWARD oifname "docker0" accept
-    echo "Docker 启动完成，规则已应用。"
-    exit 0
-}
+echo '[ "$1" = "start" ] && {' >> package-base-files/files/usr/bin/docker-nft
+echo '    echo "启动 Docker 并加载 nftables 规则..."' >> package/base-files/files/usr/bin/docker-nft
+echo '    /etc/init.d/dockerd start' >> package/base-files/files/usr/bin/docker-nft
+echo '    nft add table ip nat' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add chain ip nat PREROUTING { type nat hook prerouting priority -100 \; }' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add chain ip nat POSTROUTING { type nat hook postrouting priority 100 \; }' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add rule ip nat POSTROUTING oifname != "docker0" masquerade' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add table ip filter' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add chain ip filter INPUT { type filter hook input priority 0 \; }' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add chain ip filter FORWARD { type filter hook forward priority 0 \; }' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add chain ip filter OUTPUT { type filter hook output priority 0 \; }' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add rule ip filter FORWARD iifname "docker0" accept' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft add rule ip filter FORWARD oifname "docker0" accept' >> package-base-files/files/usr/bin/docker-nft
+echo '    echo "Docker 启动完成，规则已应用。"' >> package-base-files/files/usr/bin/docker-nft
+echo '    exit 0' >> package-base-files/files/usr/bin/docker-nft
+echo '}' >> package-base-files/files/usr/bin/docker-nft
 
-[ "$1" = "stop" ] && {
-    echo "停止 Docker 并清除 nftables 规则..."
-    /etc/init.d/dockerd stop
-    nft delete table ip nat
-    nft delete table ip filter
-    echo "Docker 停止完成，规则已清除。"
-    exit 0
-}
-EOL
+echo '[ "$1" = "stop" ] && {' >> package-base-files/files/usr/bin/docker-nft
+echo '    echo "停止 Docker 并清除 nftables 规则..."' >> package-base-files/files/usr/bin/docker-nft
+echo '    /etc/init.d/dockerd stop' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft delete table ip nat' >> package-base-files/files/usr/bin/docker-nft
+echo '    nft delete table ip filter' >> package-base-files/files/usr/bin/docker-nft
+echo '    echo "Docker 停止完成，规则已清除。"' >> package-base-files/files/usr/bin/docker-nft
+echo '    exit 0' >> package-base-files/files/usr/bin/docker-nft
+echo '}' >> package-base-files/files/usr/bin/docker-nft
 
-chmod +x package/base-files/files/usr/bin/docker-nft
+# 设置脚本为可执行
+chmod +x package-base-files/files/usr/bin/docker-nft
+
 
 
 
@@ -178,27 +178,23 @@ wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubuserco
 mkdir -p package/base-files/files/etc/uci-defaults
 
 # 创建防火墙规则脚本
-echo '#!/bin/sh
-
-# 允许所有 ZeroTier 流量
-nft add table ip zerotier
-nft add chain ip zerotier input { type filter hook input priority 0 \; }
-nft add chain ip zerotier forward { type filter hook forward priority 0 \; }
-nft add chain ip zerotier output { type filter hook output priority 0 \; }
-
-# 开放 ZeroTier 默认 UDP 端口
-nft add rule ip zerotier input udp dport 9993 accept
-nft add rule ip zerotier output udp sport 9993 accept
-
-# 允许转发所有流量
-nft add rule ip zerotier forward accept
-' > package/base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo '#!/bin/sh' > package/base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo '' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo '# 允许所有 ZeroTier 流量' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo 'nft add table ip zerotier' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo 'nft add chain ip zerotier input { type filter hook input priority 0 \; }' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo 'nft add chain ip zerotier forward { type filter hook forward priority 0 \; }' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo 'nft add chain ip zerotier output { type filter hook output priority 0 \; }' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo '' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo '# 开放 ZeroTier 默认 UDP 端口' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo 'nft add rule ip zerotier input udp dport 9993 accept' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo 'nft add rule ip zerotier output udp sport 9993 accept' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo '' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo '# 允许转发所有流量' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
+echo 'nft add rule ip zerotier forward accept' >> package-base-files/files/etc/uci-defaults/99-zerotier-firewall
 
 # 设置脚本为可执行
-chmod +x package/base-files/files/etc/uci-defaults/99-zerotier-firewall
-
-
-
+chmod +x package-base-files/files/etc/uci-defaults/99-zerotier-firewall
 
 
 
