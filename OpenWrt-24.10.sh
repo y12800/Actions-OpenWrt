@@ -77,8 +77,8 @@ git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp1 && mv deng-tmp1/applications/luci-app-diskman package/deng/luci-app-diskman
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
 
-# git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp2 && mv deng-tmp2/applications/luci-app-zerotier package/deng/luci-app-zerotier
-# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
+git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp2 && mv deng-tmp2/applications/luci-app-zerotier package/deng/luci-app-zerotier
+sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
 
 git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
