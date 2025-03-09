@@ -41,59 +41,7 @@ git clone --depth 1 https://github.com/sirpdboy/luci-app-ddns-go package/deng/lu
 git clone --depth 1 https://github.com/tty228/luci-app-wechatpush.git package/deng/luci-app-wechatpush
 
 
-# git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
-
-# 下载 luci-app-dockerman 软件包
 git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
-
-# 配置 Docker 禁用 iptables
-mkdir -p package/base-files/files/etc/docker
-cat > package/base-files/files/etc/docker/daemon.json <<EOF
-{
-    "iptables": false
-}
-EOF
-
-# 创建 docker-nft 管理脚本
-mkdir -p package/base-files/files/usr/bin
-cat > package/base-files/files/usr/bin/docker-nft <<'EOF'
-#!/bin/sh
-echo "用法: docker-nft {start|stop}"
-
-[ "$1" = "start" ] && {
-    echo "启动 Docker 并加载 nftables 规则..."
-    /etc/init.d/dockerd start
-    nft add table ip nat
-    nft add chain ip nat PREROUTING { type nat hook prerouting priority -100 \; }
-    nft add chain ip nat POSTROUTING { type nat hook postrouting priority 100 \; }
-    nft add rule ip nat POSTROUTING oifname != "docker0" masquerade
-    nft add table ip filter
-    nft add chain ip filter INPUT { type filter hook input priority 0 \; }
-    nft add chain ip filter FORWARD { type filter hook forward priority 0 \; }
-    nft add chain ip filter OUTPUT { type filter hook output priority 0 \; }
-    nft add rule ip filter FORWARD iifname "docker0" accept
-    nft add rule ip filter FORWARD oifname "docker0" accept
-    echo "Docker 启动完成，规则已应用。"
-    exit 0
-}
-
-[ "$1" = "stop" ] && {
-    echo "停止 Docker 并清除 nftables 规则..."
-    /etc/init.d/dockerd stop
-    nft delete table ip nat
-    nft delete table ip filter
-    echo "Docker 停止完成，规则已清除。"
-    exit 0
-}
-EOF
-
-# 设置脚本为可执行
-chmod +x package/base-files/files/usr/bin/docker-nft
-
-
-
-
-
 
 # git clone --depth 1 https://github.com/vernesong/OpenClash package/deng/luci-app-openclash
 # git clone --depth 1 https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/deng/luci-theme-opentomcat
@@ -168,42 +116,13 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' packag
 # sed -i 's/luci-theme-openwrt-2020/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 
 
-# sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/parted/Makefile
+# 官方版
+# mkdir -p feeds/packages/net/zerotier/files/etc/config
+# wget -O feeds/packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 feeds/packages/net/zerotier/files/etc/config/zerotier
 
-# rm -rf feeds/packages/net/zerotier/files/etc/config/zerotier
-# mkdir -p feeds/packages/net/zerotier/files/etc/config && wget -O feeds/packages/net/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 feeds/packages/net/zerotier/files/etc/config/zerotier
-
-# rm -rf package/deng/zerotier/files/etc/config/zerotier
-# mkdir -p package/deng/zerotier/files/etc/config && wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 package/deng/zerotier/files/etc/config/zerotier
-
+# 第三方
 mkdir -p package/deng/zerotier/files/etc/config
 wget -O package/deng/zerotier/files/etc/config/zerotier https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app/zerotier && chmod 644 package/deng/zerotier/files/etc/config/zerotier
-
-# 配置 ZeroTier 的防火墙规则，放置到正确的路径
-mkdir -p package/base-files/files/etc/uci-defaults
-
-# 创建防火墙规则脚本
-cat > package/base-files/files/etc/uci-defaults/99-zerotier-firewall <<'EOF'
-#!/bin/sh
-
-# 允许所有 ZeroTier 流量
-nft add table ip zerotier
-nft add chain ip zerotier input { type filter hook input priority 0 \; }
-nft add chain ip zerotier forward { type filter hook forward priority 0 \; }
-nft add chain ip zerotier output { type filter hook output priority 0 \; }
-
-# 开放 ZeroTier 默认 UDP 端口
-nft add rule ip zerotier input udp dport 9993 accept
-nft add rule ip zerotier output udp sport 9993 accept
-
-# 允许转发所有流量
-nft add rule ip zerotier forward accept
-EOF
-
-# 设置脚本为可执行
-chmod +x package/base-files/files/etc/uci-defaults/99-zerotier-firewall
-
-
 
 
 
