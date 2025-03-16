@@ -1,9 +1,10 @@
 #!/bin/bash
 
 
-
 rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
+rm -rf feeds/luci/applications/luci-app-ddns
+rm -rf feeds/packages/net/ddns-scripts
 #rm -rf feeds/luci/applications/luci-app-acme
 #rm -rf feeds/packages/net/acme
 #rm -rf feeds/packages/net/acme-acmesh
@@ -12,7 +13,6 @@ rm -rf feeds/packages/net/zerotier
 # rm -rf feeds/packages/net/speedtest-go
 # rm -rf feeds/packages/net/socat
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
-
 
 
 
@@ -77,11 +77,13 @@ git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp1 && mv deng-tmp1/applications/luci-app-diskman package/deng/luci-app-diskman
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
 
-git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp2 && mv deng-tmp2/applications/luci-app-zerotier package/deng/luci-app-zerotier
+git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp2 && mv deng-tmp2/applications/luci-app-zerotier package/deng/luci-app-zerotier && mv deng-tmp2/applications/luci-app-ddns package/deng/luci-app-ddns
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-ddns/Makefile
 
-git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier
+git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier && mv deng-tmp3/net/ddns-scripts package/deng/ddns-scripts
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/ddns-scripts/Makefile
 
 # git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp4 && mv deng-tmp4/applications/luci-app-acme package/deng/luci-app-acme
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-acme/Makefile
