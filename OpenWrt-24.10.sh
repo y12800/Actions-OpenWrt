@@ -70,20 +70,22 @@ git clone --depth 1 https://github.com/destan19/OpenAppFilter.git package/OpenAp
 # git clone --depth 1 https://github.com/librespeed/speedtest-go.git package/deng/speedtest-go
 # git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
 
-
+git clone --depth 1 -b openwrt-24.10 https://github.com/immortalwrt/luci deng-tmp2 && mv deng-tmp2/applications/luci-app-ddns package/deng/luci-app-ddns
+sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-ddns/Makefile
+git clone --depth 1 -b openwrt-24.10 https://github.com/immortalwrt/packages deng-tmp3 && mv deng-tmp3/net/ddns-scripts package/deng/ddns-scripts && mv deng-tmp3/net/ddns-scripts_aliyun package/deng/ddns-scripts_aliyun && mv deng-tmp3/net/ddns-scripts_dnspod package/deng/ddns-scripts_dnspod
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/ddns-scripts/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/ddns-scripts_aliyun/Makefile
+sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/ddns-scripts_dnspod/Makefile
 
 git clone --depth 1 https://github.com/immortalwrt-collections/luci-app-diskman.git package/deng/luci-app-diskman
 
 # git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp1 && mv deng-tmp1/applications/luci-app-diskman package/deng/luci-app-diskman
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-diskman/Makefile
 
-git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp2 && mv deng-tmp2/applications/luci-app-zerotier package/deng/luci-app-zerotier && mv deng-tmp2/applications/luci-app-ddns package/deng/luci-app-ddns
+git clone --depth 1 https://github.com/coolsnowwolf/luci deng-tmp2 && mv deng-tmp2/applications/luci-app-zerotier package/deng/luci-app-zerotier
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-zerotier/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-ddns/Makefile
-
-git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier && mv deng-tmp3/net/ddns-scripts package/deng/ddns-scripts
+git clone --depth 1 https://github.com/coolsnowwolf/packages deng-tmp3 && mv deng-tmp3/net/zerotier package/deng/zerotier
 sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/zerotier/Makefile
-sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/ddns-scripts/Makefile
 
 # git clone --depth 1 https://github.com/immortalwrt/luci deng-tmp4 && mv deng-tmp4/applications/luci-app-acme package/deng/luci-app-acme
 # sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-acme/Makefile
