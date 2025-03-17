@@ -109,6 +109,7 @@ sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/socat/Makefile
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 sed -i 's/CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"/CONFIG_FAT_DEFAULT_IOCHARSET="utf8"/g' target/linux/generic/config-6.6
 sed -i '$a\net.netfilter.nf_conntrack_max=965535' package/base-files/files/etc/sysctl.conf
+sed -i '1i /etc/init.d/ddns start' package/base-files/files/etc/rc.local
 # sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=165535' package/kernel/linux/files/sysctl-nf-conntrack.conf
 
 # Modify default theme（FROM uci-theme-bootstrap CHANGE TO luci-theme-material）
