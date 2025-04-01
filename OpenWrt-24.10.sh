@@ -14,8 +14,8 @@ rm -rf feeds/packages/net/zerotier
 # rm -rf feeds/packages/net/socat
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
-
-
+git clone --depth 1 https://github.com/vison-v/luci-app-nginx-proxy package/luci-app-nginx-proxy
+git clone --depth 1 https://github.com/Vera2016/luci-app-nginx-manager package/luci-app-nginx-manager
 
 # git clone --depth 1 https://github.com/immortalwrt-collections/luci-theme-neobird package/deng/luci-theme-neobird
 
@@ -61,7 +61,7 @@ git clone --depth 1 https://github.com/pymumu/luci-app-smartdns.git package/luci
 git clone --depth 1 https://github.com/sirpdboy/luci-app-cupsd.git package/deng/luci-app-cupsd
 # git clone --depth 1 https://github.com/y12800/zerotier package/deng/zerotier
 git clone --depth 1 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
-git clone --depth 1 https://github.com/Vera2016/luci-app-nginx-manager package/luci-app-nginx-manager
+
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
