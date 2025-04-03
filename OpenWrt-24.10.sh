@@ -14,7 +14,7 @@ rm -rf feeds/packages/net/zerotier
 # rm -rf feeds/packages/net/socat
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 
-git clone --depth 1 https://github.com/vison-v/luci-app-nginx-proxy package/luci-app-nginx-proxy
+# git clone --depth 1 https://github.com/vison-v/luci-app-nginx-proxy package/luci-app-nginx-proxy
 # git clone --depth 1 https://github.com/Vera2016/luci-app-nginx-manager package/luci-app-nginx-manager
 
 # git clone --depth 1 https://github.com/immortalwrt-collections/luci-theme-neobird package/deng/luci-theme-neobird
