@@ -13,6 +13,7 @@ rm -rf feeds/packages/net/zerotier
 # rm -rf feeds/packages/net/speedtest-go
 # rm -rf feeds/packages/net/socat
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
+sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm="if-unchanged"/' feeds/packages/lang/rust/Makefile
 
 # git clone --depth 1 https://github.com/vison-v/luci-app-nginx-proxy package/luci-app-nginx-proxy
 # git clone --depth 1 https://github.com/Vera2016/luci-app-nginx-manager package/luci-app-nginx-manager
