@@ -101,6 +101,13 @@ jobs:
     - name: 更新feeds
       run: cd openwrt && ./scripts/feeds update -a
 
+    - name: 替换最新golang
+      run: |
+        rm -rf openwrt/feeds/packages/lang/golang
+        git clone --depth=1 https://github.com/openwrt/packages.git -b master tmp-pkgs
+        cp -rf tmp-pkgs/lang/golang openwrt/feeds/packages/lang/
+        rm -rf tmp-pkgs
+
     - name: 安装feeds
       run: cd openwrt && ./scripts/feeds install -a
     
