@@ -10,7 +10,7 @@ rm -rf feeds/packages/net/ddns-scripts
 #rm -rf feeds/packages/net/acme-acmesh
 #rm -rf feeds/packages/net/acme-common
 rm -rf feeds/packages/net/zerotier
-# rm -rf feeds/packages/net/speedtest-go
+rm -rf feeds/packages/net/speedtest-go
 # rm -rf feeds/packages/net/socat
 # rm -rf feeds/luci/applications/luci-i18n-filebrowser-zh-cn
 sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
@@ -67,10 +67,10 @@ sed -i 's/EXTRA_CFLAGS:=.*/& -Wno-error=misleading-indentation/' package/OpenApp
 # git clone --depth 1 https://github.com/zhengmz/luci-app-zerotier.git package/luci-app-zerotier
 # git clone --depth 1 https://github.com/0x676e67/luci-app-watchcat-plus package/luci-app-watchcat-plus
 # git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
-git clone --depth 1 https://github.com/ZeaKyX/luci-app-speedtest-web package/deng/luci-app-speedtest-web
-git clone --depth 1 https://github.com/ZeaKyX/speedtest-web.git package/deng/speedtest-web
+git clone --depth 1 https://github.com/y12800/luci-app-speedtest-web package/deng/luci-app-speedtest-web
+git clone --depth 1 https://github.com/y12800/speedtest-web.git package/deng/speedtest-web
 # git clone --depth 1 https://github.com/librespeed/speedtest-go.git package/deng/speedtest-go
-# git clone --depth 1 https://github.com/ZeaKyX/speedtest-go.git package/deng/speedtest-go
+git clone --depth 1 https://github.com/y12800/speedtest-go.git package/deng/speedtest-go
 
 git clone --depth 1 -b openwrt-24.10 https://github.com/immortalwrt/luci deng-tmp1 && mv deng-tmp1/applications/luci-app-ddns package/deng/luci-app-ddns
 sed -i 's#../../#$(TOPDIR)/feeds/luci/#g' package/deng/luci-app-ddns/Makefile
