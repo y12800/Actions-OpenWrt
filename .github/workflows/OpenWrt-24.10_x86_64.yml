@@ -2,20 +2,20 @@
 # https://github.com/quanjindeng/Actions_OpenWrt
 #
 
-name: OpenWrt-24.10
+name: OpenWrt-24.10_x86_64
 
 on:
   repository_dispatch:
   workflow_dispatch:
   schedule:
-    - cron: 0 18 * * *
+    - cron: 0 16 * * *
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-24.10
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: OpenWrt-24.10.config
-  DIY_P1_SH: diy-part1.sh
+  CONFIG_FILE: OpenWrt-24.10_x86_64.config
+  # DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: OpenWrt-24.10.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
@@ -49,6 +49,33 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    # 添加缓存 dl 目录
+    - name: Cache dl
+      uses: actions/cache@v4
+      with:
+        path: dl
+        key: ${{ runner.os }}-openwrt-dl-${{ hashFiles('feeds.conf.default') }}
+        restore-keys: |
+          ${{ runner.os }}-openwrt-dl-
+
+    # 添加缓存 build_dir 目录
+    - name: Cache build_dir
+      uses: actions/cache@v4
+      with:
+        path: build_dir
+        key: ${{ runner.os }}-openwrt-build_dir-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-openwrt-build_dir-
+
+    # 添加缓存 .ccache 目录
+    - name: Cache ccache
+      uses: actions/cache@v4
+      with:
+        path: .ccache
+        key: ${{ runner.os }}-openwrt-ccache-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-openwrt-ccache-
+
     - name: 检查服务器配置
       run: |
         echo "警告⚠"
@@ -79,10 +106,18 @@ jobs:
         libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
         mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools \
         libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip \
-        vim wget xmlto xxd zlib1g-dev libfuse-dev upx
+        vim wget xmlto xxd zlib1g-dev libfuse-dev
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
+
+    # 自动配置 ccache 环境变量
+    - name: 配置 ccache
+      run: |
+        echo 'export CCACHE_DIR=${GITHUB_WORKSPACE}/.ccache' >> $GITHUB_ENV
+        echo 'export CCACHE_MAXSIZE=2G' >> $GITHUB_ENV
+        echo 'export CCACHE_COMPRESS=1' >> $GITHUB_ENV
+        echo 'export PATH="/usr/lib/ccache:$PATH"' >> $GITHUB_ENV
         
     - name: 克隆源码
       working-directory: /workdir
@@ -94,9 +129,9 @@ jobs:
     - name: 加载自定义feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
+        # chmod +x $DIY_P1_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
+        # $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: 更新feeds
       run: cd openwrt && ./scripts/feeds update -a
@@ -119,11 +154,10 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
-    #- name: Apply customizations
-    #  run: |
-    #    cd openwrt
-    #    wget https://raw.githubusercontent.com/y12800/Actions-OpenWrt/main/app.sh
-    #    source ./app.sh
+    - name: 强制启用 ccache
+      run: |
+        sed -i '/CONFIG_CCACHE/d' openwrt/.config
+        echo 'CONFIG_CCACHE=y' >> openwrt/.config
 
     - name: 下载软件包
       id: package
