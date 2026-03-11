@@ -36,8 +36,8 @@ bash add_turboacc.sh --no-sfe
 
 
 #Passwall
-git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
-git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall-packages
+git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall.git package/openwrt-passwall
+git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git package/openwrt-passwall-packages
 
 #主题
 git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/deng/luci-theme-argon
