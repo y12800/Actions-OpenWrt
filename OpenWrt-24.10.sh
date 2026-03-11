@@ -16,7 +16,7 @@ rm -rf feeds/packages/net/zerotier
 sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
 
 # Docker
-git clone --depth 1 https://github.com/lisaac/luci-app-dockerman package/deng/luci-app-dockerman
+git clone --depth 1 https://github.com/y12800/luci-app-dockerman package/deng/luci-app-dockerman
 sed -i "s/option iptables '1'/option iptables '0'/g" feeds/packages/utils/dockerd/files/etc/config/dockerd
 # sed -i "s/option device 'docker0'/# option device 'docker0'/g" feeds/packages/utils/dockerd/files/etc/config/dockerd
 
