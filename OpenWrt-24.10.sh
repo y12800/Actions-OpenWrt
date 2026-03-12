@@ -53,7 +53,7 @@ git clone --depth 1 https://github.com/tty228/luci-app-wechatpush.git package/de
 git clone --depth 1 https://github.com/vernesong/OpenClash.git package/OpenClash
 git clone --depth 1 https://github.com/sirpdboy/luci-app-lucky.git package/deng/luci-app-lucky
 git clone --depth 1 https://github.com/tkhot88/luci-app-filebrowser package/luci-app-filebrowser
-git clone --depth 1 https://github.com/tkhot88/luci-app-kodexplorer package/luci-app-kodexplorer && chmod -R 755 package/luci-app-kodexplorer
+git clone --depth 1 https://github.com/y12800/luci-app-kodexplorer package/luci-app-kodexplorer && chmod -R 755 package/luci-app-kodexplorer
 git clone --depth 1 https://github.com/pymumu/openwrt-smartdns package/smartdns
 git clone --depth 1 https://github.com/pymumu/luci-app-smartdns.git package/luci-app-smartdns
 git clone --depth 1 https://github.com/y12800/luci-app-cupsd.git package/deng/luci-app-cupsd
