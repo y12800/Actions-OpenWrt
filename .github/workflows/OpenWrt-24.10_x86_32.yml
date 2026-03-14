@@ -49,6 +49,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: 安装 Go 1.25
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.25.x'
+
     # 添加缓存 dl 目录
     - name: Cache dl
       uses: actions/cache@v4
@@ -136,12 +141,12 @@ jobs:
     - name: 更新feeds
       run: cd openwrt && ./scripts/feeds update -a
 
-    - name: 替换最新golang
-      run: |
-        rm -rf openwrt/feeds/packages/lang/golang
-        git clone --depth=1 https://github.com/openwrt/packages.git -b master tmp-pkgs
-        cp -rf tmp-pkgs/lang/golang openwrt/feeds/packages/lang/
-        rm -rf tmp-pkgs
+#    - name: 替换最新golang
+#      run: |
+#        rm -rf openwrt/feeds/packages/lang/golang
+#        git clone --depth=1 https://github.com/openwrt/packages.git -b master tmp-pkgs
+#        cp -rf tmp-pkgs/lang/golang openwrt/feeds/packages/lang/
+#        rm -rf tmp-pkgs
 
     - name: 安装feeds
       run: cd openwrt && ./scripts/feeds install -a
