@@ -140,7 +140,7 @@ jobs:
       run: |
         rm -rf openwrt/feeds/packages/lang/golang
         git clone --depth=1 https://github.com/openwrt/packages.git -b master tmp-pkgs
-        cp -rf tmp-pkgs/lang/golang/1.25 openwrt/feeds/packages/lang/golang
+        cp -rf tmp-pkgs/lang/golang/golang1.26 openwrt/feeds/packages/lang/golang/golang1.26
         rm -rf tmp-pkgs
 
     - name: 安装feeds
