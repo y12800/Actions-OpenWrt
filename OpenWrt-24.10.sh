@@ -20,7 +20,7 @@ git clone --depth 1 https://github.com/y12800/luci-app-dockerman package/deng/lu
 sed -i "s/option iptables '1'/option iptables '0'/g" feeds/packages/utils/dockerd/files/etc/config/dockerd
 # sed -i "s/option device 'docker0'/# option device 'docker0'/g" feeds/packages/utils/dockerd/files/etc/config/dockerd
 
-
+git clone --depth 1 https://github.com/lisaac/luci-lib-docker package/luci-lib-docker
 
 
 #Turbo ACC 网络加速设置
