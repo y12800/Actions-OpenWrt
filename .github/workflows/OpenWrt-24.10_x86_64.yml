@@ -2,7 +2,7 @@
 # https://github.com/quanjindeng/Actions_OpenWrt
 #
 
-name: OpenWrt-24.10_x86_64
+name: OpenWrt-25.12_x86_64
 
 on:
   repository_dispatch:
@@ -14,9 +14,9 @@ env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-25.12
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: OpenWrt-24.10_x86_64.config
+  CONFIG_FILE: OpenWrt-25.12_x86_64.config
   # DIY_P1_SH: diy-part1.sh
-  DIY_P2_SH: OpenWrt-24.10.sh
+  DIY_P2_SH: OpenWrt-25.12.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_WETRANSFER: false
@@ -45,36 +45,6 @@ jobs:
         remove-haskell: 'true'
         remove-codeql: 'true'
         remove-docker-images: 'true'
-
-    - name: Checkout
-      uses: actions/checkout@v5
-
-    # 添加缓存 dl 目录
-    - name: Cache dl
-      uses: actions/cache@v5
-      with:
-        path: dl
-        key: ${{ runner.os }}-openwrt-dl-${{ hashFiles('feeds.conf.default') }}
-        restore-keys: |
-          ${{ runner.os }}-openwrt-dl-
-
-    # 添加缓存 build_dir 目录
-    - name: Cache build_dir
-      uses: actions/cache@v5
-      with:
-        path: build_dir
-        key: ${{ runner.os }}-openwrt-build_dir-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-openwrt-build_dir-
-
-    # 添加缓存 .ccache 目录
-    - name: Cache ccache
-      uses: actions/cache@v5
-      with:
-        path: .ccache
-        key: ${{ runner.os }}-openwrt-ccache-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-openwrt-ccache-
 
     - name: 检查服务器配置
       run: |
@@ -111,14 +81,6 @@ jobs:
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
 
-    # 自动配置 ccache 环境变量
-    - name: 配置 ccache
-      run: |
-        echo 'export CCACHE_DIR=${GITHUB_WORKSPACE}/.ccache' >> $GITHUB_ENV
-        echo 'export CCACHE_MAXSIZE=2G' >> $GITHUB_ENV
-        echo 'export CCACHE_COMPRESS=1' >> $GITHUB_ENV
-        echo 'export PATH="/usr/lib/ccache:$PATH"' >> $GITHUB_ENV
-        
     - name: 克隆源码
       working-directory: /workdir
       run: |
@@ -153,11 +115,6 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-
-    - name: 强制启用 ccache
-      run: |
-        sed -i '/CONFIG_CCACHE/d' openwrt/.config
-        echo 'CONFIG_CCACHE=y' >> openwrt/.config
 
     - name: 下载软件包
       id: package
@@ -210,7 +167,7 @@ jobs:
       uses: actions/upload-artifact@v5
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-24.10_x64_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt-25.12_x64_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 生成release标签
