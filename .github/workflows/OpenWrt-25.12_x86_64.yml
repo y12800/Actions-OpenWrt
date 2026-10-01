@@ -45,7 +45,10 @@ jobs:
         remove-haskell: 'true'
         remove-codeql: 'true'
         remove-docker-images: 'true'
-
+        
+    - name: Checkout
+      uses: actions/checkout@v4
+      
     - name: 检查服务器配置
       run: |
         echo "警告⚠"
