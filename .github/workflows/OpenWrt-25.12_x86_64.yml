@@ -47,7 +47,7 @@ jobs:
         remove-docker-images: 'true'
         
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       
     - name: 检查服务器配置
       run: |
@@ -144,7 +144,7 @@ jobs:
       run: df -hT
 
     - name: 上传bin文件夹
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
@@ -167,7 +167,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: OpenWrt-25.12_x64_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
@@ -182,7 +182,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 发布固件
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v3
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -191,17 +191,40 @@ jobs:
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
 
-    - name: 清理workflow
-      uses: Mattraks/delete-workflow-runs@main
-      with:
-        retain_days: 1
-        keep_minimum_runs: 3
-
-    - name: 清理Releases
-      uses: dev-drprasad/delete-older-releases@v0.2.1
+#     - name: 清理Releases
+#       uses: dev-drprasad/delete-older-releases@v0.2.1
+#       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+#       with:
+#         keep_latest: 3
+#         delete_tags: true
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: 清理旧Releases（保留最新3个正式Release）
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      with:
-        keep_latest: 3
-        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh release list --limit 20 --json tagName,isDraft,isPrerelease,publishedAt \
+        | jq -r 'map(select(.isDraft==false and .isPrerelease==false)) | sort_by(.publishedAt) | reverse | .[3:] | .[].tagName' \
+        | while read -r tag; do
+            echo "正在删除 Release: $tag"
+            gh release delete "$tag" --yes
+            echo "删除远程Tag: $tag"
+            git push origin --delete "$tag"
+          done
+
+#     - name: 清理workflow
+#       uses: Mattraks/delete-workflow-runs@main
+#       with:
+#         retain_days: 1
+#         keep_minimum_runs: 3
+
+    - name: 清理workflow运行记录（保留最近3条，1天前的删除）
+      run: |
+        gh run list --limit 50 --json databaseId,createdAt \
+        | jq -r 'sort_by(.createdAt)|reverse|.[3:]|.[].databaseId' \
+        | while read -r runid; do
+            gh run delete "$runid"
+          done
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
