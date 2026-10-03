@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+rm -rf feeds/luci/applications/luci-app-adguardhome
 rm -rf feeds/luci/applications/luci-app-dockerman
 rm -rf feeds/luci/applications/luci-app-filebrowser
 rm -rf feeds/luci/applications/luci-app-ddns
