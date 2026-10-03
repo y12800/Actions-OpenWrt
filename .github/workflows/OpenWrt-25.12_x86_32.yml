@@ -2,7 +2,7 @@
 # https://github.com/quanjindeng/Actions_OpenWrt
 #
 
-name: OpenWrt-24.10_x86_32
+name: OpenWrt-25.12_x86_32
 
 on:
   repository_dispatch:
@@ -12,9 +12,9 @@ on:
 
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-24.10
+  REPO_BRANCH: openwrt-25.12
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: OpenWrt-24.10_x86_32.config
+  CONFIG_FILE: OpenWrt-25.12_x86_32.config
   # DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: OpenWrt-25.12.sh
   UPLOAD_BIN_DIR: false
@@ -45,37 +45,10 @@ jobs:
         remove-haskell: 'true'
         remove-codeql: 'true'
         remove-docker-images: 'true'
-
+        
     - name: Checkout
-      uses: actions/checkout@v4
-
-    # 添加缓存 dl 目录
-    - name: Cache dl
-      uses: actions/cache@v4
-      with:
-        path: dl
-        key: ${{ runner.os }}-openwrt-dl-${{ hashFiles('feeds.conf.default') }}
-        restore-keys: |
-          ${{ runner.os }}-openwrt-dl-
-
-    # 添加缓存 build_dir 目录
-    - name: Cache build_dir
-      uses: actions/cache@v4
-      with:
-        path: build_dir
-        key: ${{ runner.os }}-openwrt-build_dir-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-openwrt-build_dir-
-
-    # 添加缓存 .ccache 目录
-    - name: Cache ccache
-      uses: actions/cache@v4
-      with:
-        path: .ccache
-        key: ${{ runner.os }}-openwrt-ccache-${{ github.sha }}
-        restore-keys: |
-          ${{ runner.os }}-openwrt-ccache-
-
+      uses: actions/checkout@v6
+      
     - name: 检查服务器配置
       run: |
         echo "警告⚠"
@@ -101,7 +74,7 @@ jobs:
         sudo apt update -y
         sudo apt full-upgrade -y
         sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
-        bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib \
+        bzip2 ccache cmake cpio curl device-tree-compiler fastjar fakeroot flex gawk gettext gcc-multilib g++-multilib \
         git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev \
         libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
         mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools \
@@ -111,14 +84,6 @@ jobs:
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
 
-    # 自动配置 ccache 环境变量
-    - name: 配置 ccache
-      run: |
-        echo 'export CCACHE_DIR=${GITHUB_WORKSPACE}/.ccache' >> $GITHUB_ENV
-        echo 'export CCACHE_MAXSIZE=2G' >> $GITHUB_ENV
-        echo 'export CCACHE_COMPRESS=1' >> $GITHUB_ENV
-        echo 'export PATH="/usr/lib/ccache:$PATH"' >> $GITHUB_ENV
-        
     - name: 克隆源码
       working-directory: /workdir
       run: |
@@ -154,11 +119,6 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
-    - name: 强制启用 ccache
-      run: |
-        sed -i '/CONFIG_CCACHE/d' openwrt/.config
-        echo 'CONFIG_CCACHE=y' >> openwrt/.config
-
     - name: 下载软件包
       id: package
       run: |
@@ -184,7 +144,7 @@ jobs:
       run: df -hT
 
     - name: 上传bin文件夹
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
@@ -207,10 +167,10 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 上传固件
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-24.10_x86_32_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt-25.12_x86_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 生成release标签
@@ -222,7 +182,7 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 发布固件
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v3
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -231,17 +191,40 @@ jobs:
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
 
-    - name: 清理workflow
-      uses: Mattraks/delete-workflow-runs@main
-      with:
-        retain_days: 1
-        keep_minimum_runs: 3
-
-    - name: 清理Releases
-      uses: dev-drprasad/delete-older-releases@v0.2.1
+#     - name: 清理Releases
+#       uses: dev-drprasad/delete-older-releases@v0.2.1
+#       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+#       with:
+#         keep_latest: 3
+#         delete_tags: true
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: 清理旧Releases（保留最新3个正式Release）
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      with:
-        keep_latest: 3
-        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh release list --limit 20 --json tagName,isDraft,isPrerelease,publishedAt \
+        | jq -r 'map(select(.isDraft==false and .isPrerelease==false)) | sort_by(.publishedAt) | reverse | .[3:] | .[].tagName' \
+        | while read -r tag; do
+            echo "正在删除 Release: $tag"
+            gh release delete "$tag" --yes
+            echo "删除远程Tag: $tag"
+            git push origin --delete "$tag"
+          done
+
+#     - name: 清理workflow
+#       uses: Mattraks/delete-workflow-runs@main
+#       with:
+#         retain_days: 1
+#         keep_minimum_runs: 3
+
+    - name: 清理workflow运行记录（保留最近3条，1天前的删除）
+      run: |
+        gh run list --limit 50 --json databaseId,createdAt \
+        | jq -r 'sort_by(.createdAt)|reverse|.[3:]|.[].databaseId' \
+        | while read -r runid; do
+            gh run delete "$runid"
+          done
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
