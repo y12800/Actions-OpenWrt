@@ -45,6 +45,7 @@ git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/d
 # git clone --depth 1 https://github.com/derisamedia/luci-theme-alpha package/deng/luci-theme-alpha
 # git clone --depth 1 https://github.com/derisamedia/luci-app-alpha-config package/deng/luci-app-alpha-config
 git clone --depth 1 https://github.com/konstantinhidirov/luci-theme-termix package/deng/luci-theme-termix
+git clone --depth 1 https://github.com/LazuliKao/luci-theme-fluent.git package/deng/luci-theme-fluent
 #软件
 git clone --depth 1 https://github.com/lisaac/luci-app-diskman.git package/deng/luci-app-diskman
 git clone --depth 1 https://github.com/kenzok78/luci-app-adguardhome package/deng/luci-app-adguardhome
