@@ -1,15 +1,12 @@
 #
 # https://github.com/quanjindeng/Actions_OpenWrt
 #
-
 name: OpenWrt-25.12_x86_64
-
 on:
   repository_dispatch:
   workflow_dispatch:
   schedule:
     - cron: 0 16 * * *
-
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-25.12
@@ -22,11 +19,9 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
-
 jobs:
   build:
     runs-on: ubuntu-24.04
-
     steps:
     - name: 创建编译空间挂载点
       run: |
@@ -76,38 +71,37 @@ jobs:
         sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
         bzip2 ccache cmake cpio curl device-tree-compiler fastjar fakeroot flex gawk gettext gcc-multilib g++-multilib \
         git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev \
-        libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
+        libmpc-dev libmpfr-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
         mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pyelftools \
         libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip \
         vim wget xmlto xxd zlib1g-dev libfuse-dev
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
-
+        
     - name: 克隆源码
       working-directory: /workdir
       run: |
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-
+        
     - name: 加载自定义feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         # chmod +x $DIY_P1_SH
         cd openwrt
         # $GITHUB_WORKSPACE/$DIY_P1_SH
-
+        
     - name: 更新feeds
       run: cd openwrt && ./scripts/feeds update -a
-
     - name: 替换最新golang
       run: |
         rm -rf openwrt/feeds/packages/lang/golang
         git clone --depth=1 https://github.com/openwrt/packages.git -b master tmp-pkgs
         cp -rf tmp-pkgs/lang/golang openwrt/feeds/packages/lang/
         rm -rf tmp-pkgs
-
+        
     - name: 安装feeds
       run: cd openwrt && ./scripts/feeds install -a
     
@@ -118,7 +112,7 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-
+        
     - name: 下载软件包
       id: package
       run: |
@@ -127,7 +121,7 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-
+        
     - name: 编译固件
       id: compile
       run: |
@@ -138,25 +132,25 @@ jobs:
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-
+        
     - name: 检查磁盘空间
       if: (!cancelled())
       run: df -hT
-
+      
     - name: 上传bin文件夹
       uses: actions/upload-artifact@v6
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin
-
+        
     - name: 整理文件
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages
-        # rm -rf *.buildinfo
+        rm -rf *.buildinfo
         rm -rf profiles.json
         rm -rf *.manifest
         rm -rf *-kernel.bin
@@ -165,22 +159,33 @@ jobs:
         rm -rf sha256sums
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
-
+        
+    - name: 打包固件
+      id: makezip
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      run: |
+        cd ${{ env.FIRMWARE }}
+        SHORT_TIME=$(date +"%y%m%d%H%M")
+        ZIP_NAME="OpenWrt-25.12_x86_64_${SHORT_TIME}.zip"
+        zip "${ZIP_NAME}" *.img
+        echo "ZIP_PATH=$PWD/${ZIP_NAME}" >> $GITHUB_ENV
+        echo "SHORT_TIME=${SHORT_TIME}" >> $GITHUB_ENV
+        
     - name: 上传固件
       uses: actions/upload-artifact@v6
-      if: steps.organize.outputs.status == 'success' && !cancelled()
+      if: steps.makezip.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-25.12_x64_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}
-
+        name: OpenWrt-25.12_x86_64_${{ env.SHORT_TIME }}
+        path: ${{ env.ZIP_PATH }}
+        
     - name: 生成release标签
       id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
         echo "status=success" >> $GITHUB_OUTPUT
-
+        
     - name: 发布固件
       uses: softprops/action-gh-release@v3
       if: steps.tag.outputs.status == 'success' && !cancelled()
@@ -189,28 +194,4 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: ${{ env.FIRMWARE }}/*
-
-    - name: 清理旧Releases（保留最新3个正式Release）
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        gh release list --limit 20 --json tagName,isDraft,isPrerelease,publishedAt \
-        | jq -r 'map(select(.isDraft==false and .isPrerelease==false)) | sort_by(.publishedAt) | reverse | .[3:] | .[].tagName' \
-        | while read -r tag; do
-            echo "正在删除 Release: $tag"
-            gh release delete "$tag" --yes
-            echo "删除远程Tag: $tag"
-            git push origin --delete "$tag"
-          done
-
-    - name: 清理workflow运行记录（保留最近3条，1天前的删除）
-      run: |
-        gh run list --limit 50 --json databaseId,createdAt \
-        | jq -r 'sort_by(.createdAt)|reverse|.[3:]|.[].databaseId' \
-        | while read -r runid; do
-            gh run delete "$runid"
-          done
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        files: ${{ env.ZIP_PATH }}
