@@ -5,12 +5,8 @@ config zerotier 'global'
 
 config network 'earth'
 	option id 'b15644912e99c8bd'
-	option allow_global '1'
-	option allow_default '1'
-	option allow_dns '1'
+	option allow_managed '1'
 	option fw_allow_input '1'
-	option fw_allow_forward '1'
-
 
 
 
