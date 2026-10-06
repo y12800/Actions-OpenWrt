@@ -96,7 +96,7 @@ sed -i 's#../../#$(TOPDIR)/feeds/packages/#g' package/deng/vlmcsd/Makefile
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 sed -i "s/set system.@system\[-1\].timezone='GMT0'/set system.@system[-1].timezone='CST-8'/g" package/base-files/files/bin/config_generate
 sed -i "s/set system.@system\[-1\].zonename='UTC'/set system.@system[-1].zonename='Asia\/Shanghai'/g" package/base-files/files/bin/config_generate
-sed -i '/if json_get_var timezone timezone; then/,+4 s/^/#/' package/base-files/files/bin/config_generate
+# sed -i '/if json_get_var timezone timezone; then/,+4 s/^/#/' package/base-files/files/bin/config_generate
 sed -i 's/CONFIG_FAT_DEFAULT_IOCHARSET="iso8859-1"/CONFIG_FAT_DEFAULT_IOCHARSET="utf8"/g' target/linux/generic/config-6.12
 sed -i '$a\net.netfilter.nf_conntrack_max=965535' package/base-files/files/etc/sysctl.conf
 sed -i '/exit 0/i\sleep 10 && /etc/init.d/ddns start' package/base-files/files/etc/rc.local
