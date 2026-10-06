@@ -160,32 +160,21 @@ jobs:
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
-    - name: 打包固件
-      id: makezip
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      run: |
-        cd ${{ env.FIRMWARE }}
-        SHORT_TIME=$(date +"%y%m%d%H%M")
-        ZIP_NAME="OpenWrt-25.12_x86_64_${SHORT_TIME}.zip"
-        zip "${ZIP_NAME}" *.img
-        echo "ZIP_PATH=$PWD/${ZIP_NAME}" >> $GITHUB_ENV
-        echo "SHORT_TIME=${SHORT_TIME}" >> $GITHUB_ENV
-        
     - name: 上传固件
       uses: actions/upload-artifact@v6
-      if: steps.makezip.outputs.status == 'success' && !cancelled()
+      if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-25.12_x86_64_${{ env.SHORT_TIME }}
-        path: ${{ env.ZIP_PATH }}
-        
+        name: OpenWrt-25.12_x64_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE }}
+
     - name: 生成release标签
       id: tag
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
         touch release.txt
         echo "status=success" >> $GITHUB_OUTPUT
-        
+
     - name: 发布固件
       uses: softprops/action-gh-release@v3
       if: steps.tag.outputs.status == 'success' && !cancelled()
@@ -194,4 +183,5 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
-        files: ${{ env.ZIP_PATH }}
+        files: ${{ env.FIRMWARE }}/*
+
