@@ -119,6 +119,15 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
+    - name: 临时修补 homebox Makefile 关闭自动依赖扫描
+      run: |
+        cd openwrt
+        HOMEBOX_MAKEFILE="package/NetSpeedTest/homebox/Makefile"
+        if [ -f "${HOMEBOX_MAKEFILE}" ]; then
+          echo "Patch homebox Makefile add NO_AUTO_DEPENDS:=1"
+          sed -i '/define Package\/homebox/a\\tNO_AUTO_DEPENDS:=1' "${HOMEBOX_MAKEFILE}"
+        fi
+
     - name: 下载软件包
       id: package
       run: |
