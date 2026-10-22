@@ -47,7 +47,7 @@ git clone --depth 1 https://github.com/Openwrt-Passwall/openwrt-passwall-package
 
 #主题
 git clone --depth 1 https://github.com/jerrykuku/luci-theme-argon.git package/deng/luci-theme-argon
-git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/deng/luci-app-argon-config
+# git clone --depth 1 https://github.com/jerrykuku/luci-app-argon-config package/deng/luci-app-argon-config
 # git clone --depth 1 https://github.com/derisamedia/luci-theme-alpha package/deng/luci-theme-alpha
 # git clone --depth 1 https://github.com/derisamedia/luci-app-alpha-config package/deng/luci-app-alpha-config
 git clone --depth 1 https://github.com/konstantinhidirov/luci-theme-termix package/deng/luci-theme-termix
