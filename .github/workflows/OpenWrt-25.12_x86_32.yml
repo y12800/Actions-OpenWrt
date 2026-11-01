@@ -108,6 +108,13 @@ jobs:
         cp -rf tmp-pkgs/lang/golang openwrt/feeds/packages/lang/
         rm -rf tmp-pkgs
 
+    - name: 替换最新php8
+      run: |
+        rm -rf openwrt/feeds/packages/lang/php8
+        git clone --depth=1 https://github.com/openwrt/packages.git -b master tmp-pkgs-php
+        cp -rf tmp-pkgs-php/lang/php8 openwrt/feeds/packages/lang/
+        rm -rf tmp-pkgs-php
+
     - name: 安装feeds
       run: cd openwrt && ./scripts/feeds install -a
     
